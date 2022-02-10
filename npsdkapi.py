@@ -786,7 +786,7 @@ class NpSdkApi(object):
                 return self.is_updated_klines_sr(obj, propkey)
 
             else: 
-                print("不支持的参数1业务对象：%s"%type(obj))
+                print("不支持的参数1业务对象：%s"%type(obj)) 
                 return False
 
         except Exception as e:  
