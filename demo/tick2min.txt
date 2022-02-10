@@ -1,0 +1,9 @@
+def tick2min(tick_df, sample_t='1min'): # could be M,D,H,min,S...
+    df = tick_df
+    price_df = df['last_price'].resample(sample_t, label='right', closed='right').ohlc()
+    price_df = price_df.dropna()
+    vol_end_df = df[['volume','amount']].resample(sample_t, label='right', closed='right').last()
+    vol_shift_df = vol_end_df.shift(1).fillna(0)
+    vol_df = vol_end_df - vol_shift_df
+    result_df = price_df.merge(vol_df, left_index=True,right_index=True)
+    return result_df
